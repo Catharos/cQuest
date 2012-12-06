@@ -1,0 +1,46 @@
+name: cQuest
+main: net.catharos.cquest.cQuest
+description: Easy Quest management system to work with the Denizen plugin
+version: ${pom.version}-b${BUILD_NUMBER}
+author: SpaceEmotion
+website: http://www.catharos.de
+
+permissions:
+  cquest.*:
+    description: All permissions
+    children:
+      cquest.help: true
+      cquest.list: true
+      cquest.show: true
+      cquest.admin: true
+      
+  cquest.user:
+    description: All user permissions
+    children:
+      cquest.help: true
+      cquest.list: true
+      cquest.show: true
+      cquest.admin: false
+
+  cquest.help:
+    description: Help permission node
+    default: true
+
+  cquest.list:
+    description: List permission node
+    default: true
+
+  cquest.info:
+    description: Show permission node
+    default: true
+    
+  cquest.admin:
+    description: Admin permissions
+    default: op
+
+commands:
+  quest:
+    description: Main quest command
+    usage: /<command> help
+    permission: cQuest.help
+    aliases: ["quests"]
