@@ -4,6 +4,8 @@ package net.catharos.cquest;
 import java.util.logging.Level;
 
 import net.catharos.cquest.cmd.CommandManager;
+import net.catharos.cquest.cmd.cmds.CreateCommand;
+import net.catharos.cquest.cmd.cmds.ReloadCommand;
 import net.catharos.cquest.quest.QuestManager;
 import net.milkbowl.vault.permission.Permission;
 
@@ -37,6 +39,9 @@ public class cQuest extends JavaPlugin {
 		// Set up managers
 		this.cmd_manager = new CommandManager();
 		this.quest_manager = new QuestManager(this);
+		
+		// Add commands
+		this.setupCommands();
 		
 		// Everything seems fine
 		getLogger().info("Activated!");
@@ -93,5 +98,10 @@ public class cQuest extends JavaPlugin {
 		cQuest.permissions = rsp.getProvider();
 		
 		return getPermissions() != null;
+	}
+	
+	private void setupCommands() {
+		getCommandManager().addCommand(new CreateCommand(this));
+		getCommandManager().addCommand(new ReloadCommand(this));
 	}
 }
