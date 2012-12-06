@@ -5,6 +5,7 @@ import java.util.logging.Level;
 
 import net.catharos.cquest.cmd.CommandManager;
 import net.catharos.cquest.cmd.cmds.CreateCommand;
+import net.catharos.cquest.cmd.cmds.ListCommand;
 import net.catharos.cquest.cmd.cmds.ReloadCommand;
 import net.catharos.cquest.quest.QuestManager;
 import net.milkbowl.vault.permission.Permission;
@@ -102,6 +103,7 @@ public class cQuest extends JavaPlugin {
 	
 	private void setupCommands() {
 		getCommandManager().addCommand(new CreateCommand(this));
+		getCommandManager().addCommand(new ListCommand(this));
 		getCommandManager().addCommand(new ReloadCommand(this));
 	}
 }
