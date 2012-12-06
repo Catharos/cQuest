@@ -14,24 +14,23 @@ public class CreateCommand extends AbstractCommand {
 	public CreateCommand(cQuest plugin) {
 		super("Create", plugin);
 
-		setAliases("quest create");
+		setAliases("quest create", "quests create");
 		setDescription("Creates a new quest");
 		setPermission(PermissionUtil.ADMIN);
-		setArgumentRage(2, 3);
+		setArgumentRage(1, 99);
 	}
 
 	@Override
 	public boolean execute(CommandSender sender, String label, String[] args) {
 		QuestManager quest_mng = getPlugin().getQuestManager();
 		
-		QuestEntry entry = new QuestEntry(args[0]);
-		entry.setDescription(args[1]);
+		StringBuilder name_builder = new StringBuilder(args[0]);
+		for(int i = 1; i < args.length; i++) name_builder.append(' ').append(args[i]);
 		
-		if(args.length > 2) entry.setLocation(args[2]);
+		QuestEntry entry = new QuestEntry(name_builder.toString());
+		int index = quest_mng.addQuest(entry);
 		
-		quest_mng.addQuest(entry);
-		
-		sender.sendMessage(MessageUtil.parseColors("&7Quest created: &6" + entry.getName()));
+		sender.sendMessage(MessageUtil.parseColors("&2Success! &7Quest created: &6" + entry.getName() + " &d(ID: "+ index + ")"));
 		
 		return true;
 	}

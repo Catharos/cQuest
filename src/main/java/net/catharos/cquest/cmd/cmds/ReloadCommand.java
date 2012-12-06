@@ -26,4 +26,9 @@ public class ReloadCommand extends AbstractCommand {
 		
 		return true;
 	}
+	
+	@Override
+	public boolean isConsoleCmd() {
+		return true;
+	}
 }
