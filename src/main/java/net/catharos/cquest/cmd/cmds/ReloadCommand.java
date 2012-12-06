@@ -12,6 +12,7 @@ public class ReloadCommand extends AbstractCommand {
 	public ReloadCommand(cQuest plugin) {
 		super("Reload", plugin);
 
+		setAliases("quest reload");
 		setDescription("Reloads all configuration files");
 		setPermission(PermissionUtil.ADMIN);
 	}

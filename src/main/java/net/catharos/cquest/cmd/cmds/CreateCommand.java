@@ -14,6 +14,7 @@ public class CreateCommand extends AbstractCommand {
 	public CreateCommand(cQuest plugin) {
 		super("Create", plugin);
 
+		setAliases("quest create");
 		setDescription("Creates a new quest");
 		setPermission(PermissionUtil.ADMIN);
 		setArgumentRage(2, 3);
