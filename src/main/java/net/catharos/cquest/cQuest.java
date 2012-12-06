@@ -4,6 +4,7 @@ package net.catharos.cquest;
 import java.util.logging.Level;
 
 import net.catharos.cquest.cmd.CommandManager;
+import net.catharos.cquest.quest.QuestManager;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.command.Command;
@@ -13,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class cQuest extends JavaPlugin {
 	private CommandManager cmd_manager;
+	private QuestManager quest_manager;
 	
 	private static Permission permissions;
 	
@@ -32,8 +34,9 @@ public class cQuest extends JavaPlugin {
 			return;
 		}
 		
-		// Set up command manager
+		// Set up managers
 		this.cmd_manager = new CommandManager();
+		this.quest_manager = new QuestManager(this);
 		
 		// Everything seems fine
 		getLogger().info("Activated!");
@@ -62,6 +65,16 @@ public class cQuest extends JavaPlugin {
 		return this.cmd_manager;
 	}
 	
+	
+	/**
+	 * Returns the quest manager
+	 * 
+	 * @return {@link QuestManager}
+	 */
+	public final QuestManager getQuestManager() {
+		return this.quest_manager;
+	}
+
 	
 	/**
 	 * Returns the vault permission handler
