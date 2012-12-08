@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.naming.NoPermissionException;
 
 import net.catharos.cquest.cQuest;
+import net.catharos.cquest.util.ArrayUtil;
 import net.catharos.cquest.util.MessageUtil;
 
 import org.bukkit.command.CommandSender;
@@ -68,13 +69,12 @@ public class CommandManager {
 			if(cmd != null) {
 				try {
 					if(sender instanceof ConsoleCommandSender && !cmd.isConsoleCmd()) {
-						sender.sendMessage(MessageUtil.parseError("The command cannot be executed from console."));
+						MessageUtil.sendError(sender, "The command cannot be executed from console.");
 						return true;
 					}
 						
 					if(!hasPermission(sender, cmd.getPermission()))
 						throw new NoPermissionException(cmd.getPermission());
-					
 					
 					String[] cmd_args = Arrays.copyOfRange(args, args_left, args.length);
 					
@@ -82,18 +82,21 @@ public class CommandManager {
 						if( cmd.execute(sender, label, cmd_args) ) return true;
 					}
 					
-					// TODO Show help box
-								
+					// Show help box
+					MessageUtil.sendMessage(sender, "&6------------=[ &cHelp &6]=------------");
+					MessageUtil.sendMessage(sender, "Name: &6" + cmd.getName() + "&7(" + cmd.getUsage() + ")");
+					MessageUtil.sendMessage(sender, "Description: &6" + cmd.getDescription());
 					
 				} catch(NoPermissionException np_ex) {
-					sender.sendMessage(MessageUtil.parseError("You are not allowed to use that command!"));
+					MessageUtil.sendError(sender, "You are not allowed to use that command!");
 				}
 				
 				return true;
 			}
 		}
 		
-		sender.sendMessage(MessageUtil.parseError("Command not found:&6 %0", command));
+		MessageUtil.sendError(sender, "Command not found:&6 /%0 %1", command, ArrayUtil.implode(" ", args));
+		
 		return true;
 	}
 	

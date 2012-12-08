@@ -22,7 +22,7 @@ public class ReloadCommand extends AbstractCommand {
 		getPlugin().reloadConfig();
 		getPlugin().getQuestManager().reloadConfig();
 		
-		sender.sendMessage(MessageUtil.parseColors("&6All configurations reloaded!"));
+		MessageUtil.sendMessage(sender, "&6All configurations reloaded!");
 		
 		return true;
 	}

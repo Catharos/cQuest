@@ -31,14 +31,14 @@ public class ListCommand extends AbstractCommand {
 		List<QuestEntry> quests = getPlugin().getQuestManager().getQuests();
 		String page_tag = page + "/" + (int) (Math.ceil(quests.size() / PER_PAGE)+1);
 		
-		sender.sendMessage(MessageUtil.parseColors("&6------------=[ &cQuests " + page_tag + "&6]=------------"));
+		MessageUtil.sendMessage(sender, "&6------------=[ &cQuests " + page_tag + "&6]=------------");
 		
 		for(int i = 0; i < PER_PAGE ; i++) {
 			int index = i + ((page - 1) * PER_PAGE);
 			
 			if(index < quests.size()) {
 				QuestEntry quest = quests.get(index);
-				sender.sendMessage(MessageUtil.parseColors("&6" + (i+1) + ": &f" + quest.getName()));
+				MessageUtil.sendMessage(sender, "&6" + (index+1) + ": &f" + quest.getName());
 			}
 		}
 		

@@ -3,6 +3,7 @@ package net.catharos.cquest.util;
 import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 
 public class MessageUtil {
@@ -29,5 +30,13 @@ public class MessageUtil {
 
 		if(parseColors) return parseColors(msg);
 		return msg;
+	}
+	
+	public static void sendError(CommandSender sender, String msg, String... args) {
+		sender.sendMessage(parseError(msg, args));
+	}
+	
+	public static void sendMessage(CommandSender sender, String msg, String... args) {
+		sender.sendMessage(parseArguments(msg, args));
 	}
 }
